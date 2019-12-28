@@ -21,7 +21,7 @@ public class StockManagerTest {
     }
 
     @Test
-    void checkInvalid10DigitsISBN() {
+    void databaseIsUsedIfDataIsPresent() {
 
         when(dataService.lookup(any())).thenReturn(book);
 
