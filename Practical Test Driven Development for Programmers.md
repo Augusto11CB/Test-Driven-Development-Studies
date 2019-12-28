@@ -56,6 +56,39 @@ The goal of this step is to write the minimum code needed to make the test pass
 
 3. REFACTOR 
 
+## Mock vs Stubs vs Fake
+
+### Fake
+* When is necessary override something
+* What's it for? Its presence is just needed either to make the code work or to avoid effects caused by the absence of the object that the code might have that don't impact the test, however is it desireble that effect doesn't happen. In order to avoid that it is just necessary use mocks.
+```java
+//How to do it in Mockito
+mock()
+```
+
+### Mock
+*	Override External Dependencies
+* Used to check if whether or not objects are being used 
+	*  Test behavior
+
+```java
+//How to do it in Mockito
+mock()
+verify().myMethod()
+```
+
+### Stubs
+*	Override External Dependencies
+* Are used to the object to return some data 	
+	*  Used to test Data
+	* Test the outcome of the called method
+
+```java
+//How to do it in Mockito
+mock()
+when().thenReturn()
+```
+
 ## Junit 
 
 ### Expecting An Exception  To Be  Thrown
@@ -119,3 +152,6 @@ void valueIsNotNull() {
 #### assertArrayEquals()
 
 ### Assumptions
+
+## Mockito
+
