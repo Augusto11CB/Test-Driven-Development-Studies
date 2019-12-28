@@ -3,10 +3,10 @@ package com.isbn.calculator;
 public class StockManager {
 
     private ExternalISBNDataService webService;
-    private ExternalISBNDataService dataBaseService;
+    private ExternalISBNDataService databaseService;
 
     public void setDataBaseService(ExternalISBNDataService dataBaseService) {
-        this.dataBaseService = dataBaseService;
+        this.databaseService = dataBaseService;
     }
 
     public void setService(ExternalISBNDataService service) {
@@ -15,8 +15,8 @@ public class StockManager {
 
     public String getLocatorCode(String isbn) {
 
-
-        Book book = webService.lookup(isbn);
+        Book book = databaseService.lookup(isbn);
+        if (book == null) book = webService.lookup(isbn);
 
         StringBuilder locator = new StringBuilder();
         locator.append(isbn.substring(isbn.length() - 4));
