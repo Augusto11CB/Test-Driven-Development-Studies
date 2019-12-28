@@ -1,15 +1,26 @@
 
 # Practical Test Driven Development
 
+---
+TODO:  Study [Writing Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-repeated-tests)
+* [assertAll](https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions)
+* [Dependency Injection for Constructors and Methods](https://junit.org/junit5/docs/current/user-guide/#writing-tests-dependency-injection)
+* [Nested Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested)
+* [Repeated Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-repeated-tests)
+* [Parameterized Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests)
+
+
 ## Rules of TDD
 1. **Test the expected outcome of an example**
-
+	When writting test, think about expected outcomes not the logic, architecture, design pattern etc. Generally, tests will work on the basis of "cover all the particular "examples"" that the code might have.
+	
 2. **Don't pre-judge design... let your test drive it**
+In TDD, the decisions around things like data types, class structure, architecture will change over time as the tests come up in order to achieve the requirements.
 
 3. **Write the minimum code required to get the tests to pass**
 
 4. **Each test should validate one single piece of logic**
-	Some times more the one `assert` is required to validate the logic. But when working with more than one assert it must fit one of the following cases:  
+	Some times more than one `assert` is required to validate the logic. But when working with more than one assert it must fit one of the following cases:  
 	
 	A. Test more than one value to check that something worked correctly.
 	> Ex.: A method is spected to set values in a class, is fine write assertions for each of those variables.
@@ -39,8 +50,10 @@ We don't have to create a one-to-one relationship between the tests and the meth
 
 1.  RED
 Always start a test method with `fail()`. By doing so, we ensure that non-implemented methods does not pass after the tests execution.
+
 2. GREEN
 The goal of this step is to write the minimum code needed to make the test pass
+
 3. REFACTOR 
 
 ## Junit 
@@ -67,3 +80,42 @@ public void notValid(){
 	validator.checkNumberAccount("001122")
 }
 ```
+
+### Asserts
+
+#### assertTrue() or assertFalse()
+```java
+@Test  
+public void checkAValid10DigitsISBN() {  
+  
+  boolean result = validator.checkISBN("0135781868");  
+  assertTrue(result, "First   Value");  
+  
+  result = validator.checkISBN("ABCDEFGHIJ");  
+  assertTrue(result, "Second Value");  
+}
+```
+
+#### assertThrows()
+```java
+@Test  
+void lessThan10Digits() {  
+    assertThrows(NumberFormatException.class, () -> validator.checkISBN("134494164"));  
+}
+```
+#### assertDoesNotThrow()
+
+#### assertNotNull()
+```java
+@Test  
+void valueIsNotNull() {  
+    MySystem mySystem = new MySystem();
+    String value = mySystem.getValue();
+    assertNotNull(value);
+}
+```
+#### assertEquals()
+#### assertNotEquals()
+#### assertArrayEquals()
+
+### Assumptions
