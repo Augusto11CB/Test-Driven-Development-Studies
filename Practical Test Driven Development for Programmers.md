@@ -56,6 +56,12 @@ The goal of this step is to write the minimum code needed to make the test pass
 
 3. REFACTOR 
 
+## Avoid Tautologies
+Tautology is the scenario that there are the repetition of the test code in the code that has been tested.
+
+** How to Avoid Toutologies ** 
+The test code cannot include any logic. Keep in mind that the test should be created based on example(situations) and known outcomes.
+
 ## Mock vs Stubs vs Fake
 
 ### Fake
@@ -135,8 +141,7 @@ public void checkAValid10DigitsISBN() {
 void lessThan10Digits() {  
     assertThrows(NumberFormatException.class, () -> validator.checkISBN("134494164"));  
 }
-```
-#### assertDoesNotThrow()
+``` 
 
 #### assertNotNull()
 ```java
@@ -147,6 +152,7 @@ void valueIsNotNull() {
     assertNotNull(value);
 }
 ```
+#### assertDoesNotThrow()
 #### assertEquals()
 #### assertNotEquals()
 #### assertArrayEquals()
