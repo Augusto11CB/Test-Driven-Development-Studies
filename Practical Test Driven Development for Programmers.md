@@ -160,4 +160,37 @@ void valueIsNotNull() {
 ### Assumptions
 
 ## Mockito
+### Mock
+
+### Spy
+**Spy Methods Structure**
+```java
+doReturn(returnValue).when(spyObject).methodCall(params)
+```
+
+ **Contextualization**
+Private objects cannot be overrided, even if mocks of objects were created, how could it be injected into the method which has these private objects. 
+
+```java
+public BigDecimal getInterestRate(){
+   RestTemplate restTemplate = new RestTemplate();  //PRIVATE OBJECT!!
+   return restTemplate.getForObject("http://site.com", BigDecimal.class);
+}
+```
+
+**Solution**
+Spying the object. The object still been used, however there is the possibility to stub one or more of its methods. In other words, by using spy the method of an object can be replaced keeping the rest of the object intact.
+
+```java
+//Test class
+@Spy  
+private LoanApplication loan;
+
+@Test
+public void testMethod(){
+	loan = spy(new LoanApplication());
+	doReturn(new BigDecimal(10)).when(loan).getInterestRate();
+}
+```
+
 
