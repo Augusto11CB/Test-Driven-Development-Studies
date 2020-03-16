@@ -152,7 +152,8 @@ void valueIsNotNull() {
     assertNotNull(value);
 }
 ```
-#### assertDoesNotThrow()
+
+
 #### assertEquals()
 ```kotlin
 @Test
@@ -165,6 +166,7 @@ fun dontsaveCandidatePreRegistrationListWhenSomethingHappen() {
 }
 ```
 
+#### assertDoesNotThrow()
 #### assertNotEquals()
 #### assertArrayEquals()
 
