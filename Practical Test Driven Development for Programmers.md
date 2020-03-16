@@ -179,7 +179,7 @@ public BigDecimal getInterestRate(){
 ```
 
 **Solution**
-Spying the object. The object still been used, however there is the possibility to stub one or more of its methods. In other words, by using spy the method of an object can be replaced keeping the rest of the object intact.
+Spying the object. The object still been used, however there is the possibility to stub one or more of its methods. In other words, by using spy the method of an object can be replaced **keeping the rest of the object intact.**
 
 ```java
 //Test class
@@ -193,4 +193,54 @@ public void testMethod(){
 }
 ```
 
+**Kotlin Spy - How to Use**
+```kotlin
+private var lateinit myNiceService: MyNiceService
+
+myNiceService = spy(MyNiceService(
+            Mockito.mock(DependencyOne::class.java),
+            Mockito.mock(DependencyTwo::class.java)))
+```
+
+## Examples Unit Test Methods
+
+```kotlin
+//KOTLIN
+//REPO
+private var lateinit registrationService: RegistrationService
+
+//SERVICE
+private var lateinit registrationRepository: RegistrationRepository
+
+//OBJECTS
+private var lateinit candidatePreRegistre: CandidatePreRegistre
+
+@BeforeEach
+fun init() {
+	this.registrationRepository = mock();
+	
+	this.registrationService =  RegistrationService(registrationRepository)
+	
+	this.candidatePreRegistre = CandidatePreRegistre()
+}
+
+@Test
+fun dontsaveCandidatePreRegistrationListWhenSomethingHappen() {
+	
+	whenever(registrationRepository.findById(any())).thenReturn(candidatePreRegistre)
+	
+	val exception = assertThrows<InvalidStateException> {
+		this.registrationService.save(candidatePreRegistre)
+	}
+	verify(registrationRepository, never()).save(any<CandidatePreRegistre>)
+	
+	assertEquals("Error with saving CandidatePreRegistre", exception.message)
+}
+
+private var lateinit myNiceService: MyNiceService
+
+myNiceService = spy(MyNiceService(
+            Mockito.mock(DependencyOne::class.java),
+            Mockito.mock(DependencyTwo::class.java)))
+```
 
