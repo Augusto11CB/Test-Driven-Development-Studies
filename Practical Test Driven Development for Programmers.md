@@ -154,6 +154,17 @@ void valueIsNotNull() {
 ```
 #### assertDoesNotThrow()
 #### assertEquals()
+```kotlin
+@Test
+fun dontsaveCandidatePreRegistrationListWhenSomethingHappen() {
+		
+	val exception = assertThrows<InvalidStateException> {
+		this.registrationService.save(candidatePreRegistre)
+	}	
+	assertEquals("Error with saving CandidatePreRegistre", exception.message)
+}
+```
+
 #### assertNotEquals()
 #### assertArrayEquals()
 
@@ -236,11 +247,5 @@ fun dontsaveCandidatePreRegistrationListWhenSomethingHappen() {
 	
 	assertEquals("Error with saving CandidatePreRegistre", exception.message)
 }
-
-private var lateinit myNiceService: MyNiceService
-
-myNiceService = spy(MyNiceService(
-            Mockito.mock(DependencyOne::class.java),
-            Mockito.mock(DependencyTwo::class.java)))
 ```
 
